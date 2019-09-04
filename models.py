@@ -19,7 +19,7 @@ class User(UserMixin, Model):
 
 
 class Data(Model):
-    current_time = DateTimeField(default=datetime.datetime.now)
+    current_time = DateTimeField(default=datetime.datetime.now, null=True)
     query_string = CharField(null=False)
     exclusions = CharField(null=True)
     cached_ID = CharField(null=True)
