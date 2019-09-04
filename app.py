@@ -33,4 +33,5 @@ CORS(data, origins=["http://localhost:3000"], supports_credentials=True)
 app.register_blueprint(data)
 
 if __name__ == "__main__":
+    models.initialize()
     app.run(debug=DEBUG, port=PORT)
