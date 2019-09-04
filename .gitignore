@@ -125,3 +125,6 @@ dmypy.json
 
 #CodeEditor
 .vscode/
+
+#Notes and Sundry Items 
+private/
