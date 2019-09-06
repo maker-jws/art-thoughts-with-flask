@@ -8,11 +8,12 @@ source = Blueprint("source", "source", url_prefix="/source/v1")
 
 
 @source.route("/", methods=["GET"])
-def get_all_url_results():
+def get_all_source_results():
     try:
         print(request, 'request on get route-sourceUrl')
         sources = [model_to_dict(source) for source in models.Source.select()]
         return jsonify(data=sources, status={"code": 200, "message": "Success"})
+
     except models.DoesNotExist:
         return jsonify(
             data={},
@@ -25,7 +26,7 @@ def get_all_url_results():
 def store_source_url():
     print(request, "request")
     payload = request.get_json()
-    print(payload)
+    print(payload, "after json payload")
     source = models.Source.create(**payload)
     # print(query.___dict___, 'inside query')
     source_dict = model_to_dict(source)

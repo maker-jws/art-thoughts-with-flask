@@ -4,7 +4,7 @@ import datetime
 from peewee import *
 from playhouse.db_url import connect
 
-DATABASE = SqliteDatabase('data.sqlite')
+DATABASE = SqliteDatabase('data1.sqlite')
 
 
 class User(UserMixin, Model):
@@ -39,7 +39,7 @@ class Source(Model):
     query_string = CharField(null=False)
     initial_value = IntegerField(default=0, null=True)
     search_num = IntegerField(default=0, null=True)
-    source_url = CharField(null=True)
+    base_url = CharField(null=True)
 
     class Meta:
         database = DATABASE
