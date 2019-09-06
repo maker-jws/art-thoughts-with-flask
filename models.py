@@ -1,8 +1,8 @@
-from peewee import *
 from flask_login import UserMixin
 # import os
 import datetime
-# from playhouse.db_url import connect
+from peewee import *
+from playhouse.db_url import connect
 
 DATABASE = SqliteDatabase('data.sqlite')
 
@@ -27,6 +27,19 @@ class Data(Model):
     search_num = IntegerField(default=0, null=True)
     was_selected = BooleanField(default=False, null=True)
     search_num = IntegerField(default=0, null=True)
+    user_id = IntegerField(default=0, null=True)
+
+    class Meta:
+        database = DATABASE
+
+
+class Source(Model):
+    cached_ID = CharField(null=True)
+    current_time = DateTimeField(default=datetime.datetime.now, null=True)
+    query_string = CharField(null=False)
+    initial_value = IntegerField(default=0, null=True)
+    search_num = IntegerField(default=0, null=True)
+    source_url = CharField(null=True)
 
     class Meta:
         database = DATABASE
@@ -34,6 +47,6 @@ class Data(Model):
 
 def initialize():
     DATABASE.connect()
-    DATABASE.create_tables([Data], safe=True)
+    DATABASE.create_tables([Data, Source], safe=True)
     print("Data TABLES created")
     DATABASE.close()

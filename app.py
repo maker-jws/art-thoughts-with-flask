@@ -1,6 +1,7 @@
+from api.data import data
+from api.source import source
 import os
 from flask import Flask, g, session
-from api.data import data
 from flask_login import LoginManager
 from flask_cors import CORS
 import models
@@ -30,7 +31,9 @@ def index():  # creates
 
 
 CORS(data, origins=["http://localhost:3000"], supports_credentials=True)
+CORS(source, origins=["http://localhost:3000"], supports_credentials=True)
 app.register_blueprint(data)
+app.register_blueprint(source)
 
 if __name__ == "__main__":
     models.initialize()
