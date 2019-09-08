@@ -1,5 +1,6 @@
 from api.data import data
 from api.source import source
+from api.select import select
 import os
 from flask import Flask, g, session
 from flask_login import LoginManager
@@ -30,10 +31,12 @@ def index():  # creates
     return message
 
 
+CORS(select, origins=["http://localhost:3000"], supports_credentials=True)
 CORS(data, origins=["http://localhost:3000"], supports_credentials=True)
 CORS(source, origins=["http://localhost:3000"], supports_credentials=True)
 app.register_blueprint(data)
 app.register_blueprint(source)
+app.register_blueprint(select)
 
 if __name__ == "__main__":
     models.initialize()

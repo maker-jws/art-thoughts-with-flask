@@ -28,7 +28,6 @@ def store_source_url():
     payload = request.get_json()
     print(payload, "after json payload")
     source = models.Source.create(**payload)
-    # print(query.___dict___, 'inside query')
     source_dict = model_to_dict(source)
     return jsonify(data=source_dict, status={"code": 201, "message": "Success"})
 
@@ -41,8 +40,8 @@ def get_one_source(id):
 
 @source.route('/<id>', methods=["DELETE"])
 def delete_source(id):
-    query = models.Data.delete().where(models.Data.id == id)
-    response = query.execute()
+    Source = models.Source.delete().where(models.Source.id == id)
+    response = Source.execute()
     print(response)
     return jsonify(  # not sure why you need to jsonify
         data="resource successfully deleted",
