@@ -6,7 +6,8 @@ from playhouse.db_url import connect
 
 
 # DATABASE = SqliteDatabase('data2.sqlite')
-DATABASE = connect(os.environ.get('DATABASE_URL'))
+DATABASE = connect(os.environ.get(
+    'https://art-thoughts-with-flask.herokuapp.com/'))
 
 
 class User(UserMixin, Model):
