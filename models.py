@@ -4,7 +4,6 @@ import os
 import datetime
 from playhouse.db_url import connect
 
-
 # DATABASE = SqliteDatabase('data2.sqlite')
 DATABASE = connect(os.environ.get('DATABASE_URL'))
 
