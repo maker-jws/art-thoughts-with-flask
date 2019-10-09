@@ -60,13 +60,21 @@ def get_table_len():
 #             status={"code": 401,
 #                     "message": "There was an error getting the resource"},
 #         )
-CORS(app, origins=["http://localhost:3000"], supports_credentials=True)
-CORS(select, origins=["http://localhost:3000"], supports_credentials=True)
-CORS(data, origins=["http://localhost:3000"], supports_credentials=True)
-CORS(source, origins=["http://localhost:3000"], supports_credentials=True)
+CORS(app, origins=["http://localhost:3000", "http://art-thoughts-with-rock.herokuapp.com",
+                   "https://art-thoughts-with-rock.herokuapp.com"], supports_credentials=True)
+CORS(select, origins=["http://localhost:3000", "http://art-thoughts-with-rock.herokuapp.com",
+                      "https://art-thoughts-with-rock.herokuapp.com"], supports_credentials=True)
+CORS(data, origins=["http://localhost:3000",  "http://art-thoughts-with-rock.herokuapp.com",
+                    "https://art-thoughts-with-rock.herokuapp.com"], supports_credentials=True)
+CORS(source, origins=["http://localhost:3000", "http://art-thoughts-with-rock.herokuapp.com",
+                      "https://art-thoughts-with-rock.herokuapp.com"], supports_credentials=True)
 app.register_blueprint(data)
 app.register_blueprint(source)
 app.register_blueprint(select)
+
+if 'ON_HEROKU' in os.environ:
+    print('hitting heroku')
+    models.initialize()
 
 if __name__ == "__main__":
     models.initialize()
