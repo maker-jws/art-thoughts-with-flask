@@ -1,7 +1,7 @@
+from peewee import *
 from flask_login import UserMixin
 import os
 import datetime
-from peewee import *
 from playhouse.db_url import connect
 
 
@@ -9,15 +9,15 @@ from playhouse.db_url import connect
 DATABASE = connect(os.environ.get('DATABASE_URL'))
 
 
-class User(UserMixin, Model):
-    loginTime = DateTimeField(default=datetime.datetime.now)
-    username = CharField(unique=True, null=True)
-    password = CharField(null=True)
-    login = DateTimeField(default=datetime.datetime.now)
-    is_active = BooleanField(default=False, null=True)
+# class User(UserMixin, Model):
+#     loginTime = DateTimeField(default=datetime.datetime.now)
+#     username = CharField(unique=True, null=True)
+#     password = CharField(null=True)
+#     login = DateTimeField(default=datetime.datetime.now)
+#     is_active = BooleanField(default=False, null=True)
 
-    class Meta:
-        database = DATABASE
+#     class Meta:
+#         database = DATABASE
 
 
 class Data(Model):
