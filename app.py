@@ -1,7 +1,7 @@
+import os
 from api.data import data
 from api.source import source
 from api.select import select
-import os
 from flask import Flask, g, session, request, jsonify
 from flask_login import LoginManager
 from flask_cors import CORS
@@ -11,6 +11,18 @@ DEBUG = True
 PORT = 8000
 
 app = Flask(__name__)
+
+CORS(app, origins=["http://localhost:3000", "http://art-thoughts-with-rock.herokuapp.com",
+                   "https://art-thoughts-with-rock.herokuapp.com"], supports_credentials=True)
+CORS(select, origins=["http://localhost:3000", "http://art-thoughts-with-rock.herokuapp.com",
+                      "https://art-thoughts-with-rock.herokuapp.com"], supports_credentials=True)
+CORS(data, origins=["http://localhost:3000",  "http://art-thoughts-with-rock.herokuapp.com",
+                    "https://art-thoughts-with-rock.herokuapp.com"], supports_credentials=True)
+CORS(source, origins=["http://localhost:3000", "http://art-thoughts-with-rock.herokuapp.com",
+                      "https://art-thoughts-with-rock.herokuapp.com"], supports_credentials=True)
+app.register_blueprint(data)
+app.register_blueprint(source)
+app.register_blueprint(select)
 
 
 @app.before_request
@@ -60,17 +72,7 @@ def get_table_len():
 #             status={"code": 401,
 #                     "message": "There was an error getting the resource"},
 #         )
-CORS(app, origins=["http://localhost:3000", "http://art-thoughts-with-rock.herokuapp.com",
-                   "https://art-thoughts-with-rock.herokuapp.com"], supports_credentials=True)
-CORS(select, origins=["http://localhost:3000", "http://art-thoughts-with-rock.herokuapp.com",
-                      "https://art-thoughts-with-rock.herokuapp.com"], supports_credentials=True)
-CORS(data, origins=["http://localhost:3000",  "http://art-thoughts-with-rock.herokuapp.com",
-                    "https://art-thoughts-with-rock.herokuapp.com"], supports_credentials=True)
-CORS(source, origins=["http://localhost:3000", "http://art-thoughts-with-rock.herokuapp.com",
-                      "https://art-thoughts-with-rock.herokuapp.com"], supports_credentials=True)
-app.register_blueprint(data)
-app.register_blueprint(source)
-app.register_blueprint(select)
+
 
 if 'ON_HEROKU' in os.environ:
     print('hitting heroku')
