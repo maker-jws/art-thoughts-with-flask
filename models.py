@@ -9,18 +9,6 @@ if 'ON_HEROKU' in os.environ:
 else:
     DATABASE = SqliteDatabase('data2.sqlite')
 
-
-# class User(UserMixin, Model):
-#     loginTime = DateTimeField(default=datetime.datetime.now)
-#     username = CharField(unique=True, null=True)
-#     password = CharField(null=True)
-#     login = DateTimeField(default=datetime.datetime.now)
-#     is_active = BooleanField(default=False, null=True)
-
-#     class Meta:
-#         database = DATABASE
-
-
 class Data(Model):
     current_time = DateTimeField(default=datetime.datetime.now, null=True)
     query_string = CharField(null=True)
@@ -33,7 +21,6 @@ class Data(Model):
 
     class Meta:
         database = DATABASE
-
 
 class Select(Model):
     current_time = DateTimeField(default=datetime.datetime.now, null=True)
