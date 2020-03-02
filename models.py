@@ -4,8 +4,10 @@ import os
 import datetime
 from playhouse.db_url import connect
 
-# DATABASE = SqliteDatabase('data2.sqlite')
-DATABASE = connect(os.environ.get('DATABASE_URL'))
+if 'ON_HEROKU' in os.environ:
+    DATABASE = connect(os.environ.get('DATABASE_URL'))
+else:
+    DATABASE = SqliteDatabase('data2.sqlite')
 
 
 # class User(UserMixin, Model):
@@ -27,7 +29,6 @@ class Data(Model):
     initial_value = IntegerField(default=0, null=True)
     search_num = IntegerField(default=0, null=True)
     was_selected = BooleanField(default=False, null=True)
-    search_num = IntegerField(default=0, null=True)
     user_id = IntegerField(default=0, null=True)
 
     class Meta:
