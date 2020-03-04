@@ -7,7 +7,7 @@ from playhouse.db_url import connect
 if 'ON_HEROKU' in os.environ:
     DATABASE = connect(os.environ.get('DATABASE_URL'))
 else:
-    DATABASE = SqliteDatabase('data2.sqlite')
+    DATABASE = PostgresqlDatabase('art_thoughts')
 
 class Data(Model):
     current_time = DateTimeField(default=datetime.datetime.now, null=True)
