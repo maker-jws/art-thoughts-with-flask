@@ -39,7 +39,6 @@ class Select(Model):
     class Meta:
         database = DATABASE
 
-
 class Source(Model):
     cached_ID = CharField(null=True)
     current_time = DateTimeField(default=datetime.datetime.now, null=True)
@@ -51,7 +50,6 @@ class Source(Model):
 
     class Meta:
         database = DATABASE
-
 
 def initialize():
     DATABASE.connect()
