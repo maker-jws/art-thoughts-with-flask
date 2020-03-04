@@ -13,13 +13,13 @@ PORT = 8000
 app = Flask(__name__)
 
 CORS(app, origins=["http://localhost:3000", "http://art-thoughts-with-rock.herokuapp.com",
-                   "https://art-thoughts-with-rock.herokuapp.com"], supports_credentials=True)
+                   "https://art-thoughts-with-rock.herokuapp.com", "http://art-thoughts-with-rock.surge.sh"], supports_credentials=True)
 CORS(select, origins=["http://localhost:3000", "http://art-thoughts-with-rock.herokuapp.com",
-                      "https://art-thoughts-with-rock.herokuapp.com"], supports_credentials=True)
+                      "https://art-thoughts-with-rock.herokuapp.com", "http://art-thoughts-with-rock.surge.sh"], supports_credentials=True)
 CORS(data, origins=["http://localhost:3000",  "http://art-thoughts-with-rock.herokuapp.com",
-                    "https://art-thoughts-with-rock.herokuapp.com"], supports_credentials=True)
+                    "https://art-thoughts-with-rock.herokuapp.com", "http://art-thoughts-with-rock.surge.sh"], supports_credentials=True)
 CORS(source, origins=["http://localhost:3000", "http://art-thoughts-with-rock.herokuapp.com",
-                      "https://art-thoughts-with-rock.herokuapp.com"], supports_credentials=True)
+                      "https://art-thoughts-with-rock.herokuapp.com", "http://art-thoughts-with-rock.surge.sh"], supports_credentials=True)
 app.register_blueprint(data)
 app.register_blueprint(source)
 app.register_blueprint(select)
@@ -58,21 +58,6 @@ def get_table_len():
         return jsonify(data=current_count, status={"code": 200, "message": "Success"})
     except models.DoesNotExist:
         return jsonify(data={}, status={"code": 401, "message": "There was an error getting the resource"})
-
-
-# @data.route("/", methods=["GET"])
-# def get_query_results():
-#     try:
-#         print(request, "request on get route-Query")
-#         queries = [model_to_dict(query) for query in models.Data.select()]
-#         return jsonify(data=queries, status={"code": 200, "message": "Success"})
-#     except models.DoesNotExist:
-#         return jsonify(
-#             data={},
-#             status={"code": 401,
-#                     "message": "There was an error getting the resource"},
-#         )
-
 
 if 'ON_HEROKU' in os.environ:
     print('hitting heroku')
